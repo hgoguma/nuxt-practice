@@ -1,37 +1,23 @@
 <template>
     <div class="container">
-        <div class="inputWrapper">
-            <b-row>
-                <b-col cols="8">
-                     <b-form-input v-model="keyword" type="text" placeholder="지역을 입력해주세요"></b-form-input>
-                </b-col>
-                <b-col>
-                    <b-button variant="primary" @click="search">
-                        <b-icon icon="search"></b-icon>
-                    </b-button>
-                </b-col>
-            </b-row>
-        </div>
+        <seachInput :placeholderMsg="this.placeholderMsg" />
         
-        <b-container class="mb-2">
-            <b-row cols="4" cols-md="4" cols-xl="4">
-                <b-col md="3" v-for="(ele, idx) in list" :key="idx">
-                    <b-card
-                        :title="ele.place_name"
-                        style="max-width: 20rem;"
-                        class="card mb-2"
-                        @click="kakaoMap(ele.place_url)"
-                    >
-                        <b-card-text>
-                            {{ele.category_name}}
-                        </b-card-text>
-                        <!-- <b-button href="#" variant="primary">
-                            <b-icon icon="star"></b-icon>
-                        </b-button> -->
-                    </b-card>
-                </b-col>
-            </b-row>
-        </b-container>
+        <b-list-group>
+            <b-list-group-item class="d-flex justify-content-between align-items-center">
+                Cras justo odio
+                <b-badge variant="primary" pill>14</b-badge>
+            </b-list-group-item>
+
+            <b-list-group-item class="d-flex justify-content-between align-items-center">
+                Dapibus ac facilisis in
+                <b-badge variant="primary" pill>2</b-badge>
+            </b-list-group-item>
+
+            <b-list-group-item class="d-flex justify-content-between align-items-center">
+                Morbi leo risus
+                <b-badge variant="primary" pill>1</b-badge>
+            </b-list-group-item>
+        </b-list-group>
     </div>
 </template>
 
@@ -46,8 +32,8 @@
 
 <script>
 
-// import { BIcon } from 'bootstrap-vue';
 import { axios } from '@nuxtjs/axios';
+import seachInput from '../../components/common/searchInput';
 
 export default {
 
@@ -65,19 +51,17 @@ export default {
     // },
 
     components: {
-       
+       seachInput
     },
     data() {
         return {
-            keyword: '',
+            placeholderMsg: '지역을 입력해주세요',
             list: []
         }
     },
-    methods: {
-        search() {
-            console.log('검색!');
-            let query = encodeURI(this.keyword + '맛집', 'UTF-8');
-
+    created() {
+        this.$nuxt.$on('search', (keyword) => {
+            let query = encodeURI(keyword + '맛집', 'UTF-8');
             this.$axios.get(`https://dapi.kakao.com/v2/local/search/keyword.json?query=${query}&category_group_code=FD6&sort=accuracy`)
             .then((res) => {
                 res.data.documents.forEach(ele => {
@@ -85,10 +69,11 @@ export default {
                 });
                 console.log('res?', res.data.documents);
                 this.list = res.data.documents;
-            })
-
-        },
-        kakaoMap(url) {
+            });
+        });
+    },
+    methods: {
+        kakaoSearch(query) {
             console.log('kakaoMap');
             location.href=url;
         }
