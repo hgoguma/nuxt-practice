@@ -9,13 +9,13 @@
         </div>
         <div>
             <div class="info">
-                할 일 {{todoList.length}} 개 남음
+                할 일 {{ todoList.filter(element => element.checkedFlag === false).length }} 개 남음
             </div>
             <todoList :todoList="this.todoList" />
         </div>
-        <div>
+        <!-- <div>
             전체 삭제 버튼
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -42,7 +42,6 @@ export default {
         todoList
     },
     props: ['todoList'],
-
     created() {
         this.$nuxt.$on('submit', (inputVal) => {
             this.$store.dispatch('addTodoList', inputVal);

@@ -71,6 +71,7 @@
 
     .todo-contents.done {
         color: #ced4da;
+        text-decoration: line-through;
     }
 
     .btn-wrapper {
