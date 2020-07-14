@@ -4,10 +4,10 @@
     padding: 0;
 } */
 
-.container {
-    margin: 0 auto;
-    padding: 0;
+.contents {
     padding-top: 56px;
+    /* margin: 30px auto; */
+    /* width: 500px; */
 }
 
 .section {

@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import userModule from './modules/user'
 import pageModule from './modules/page'
 import movieDataModule from './modules/movieData'
+import todoListModule from './modules/todoList'
 
 
 
@@ -14,14 +15,14 @@ const createStore = () => {
         
         actions: {
             nuxtServerInit(vuexContext, context) {
-                //console.log('nuxtServerInit!! 현재 상태 : ', vuexContext.state.user);
             },
         },
 
         modules: {
             user: userModule,
             page: pageModule,
-            movieData: movieDataModule
+            movieData: movieDataModule,
+            todoList: todoListModule
         }
     })
 };

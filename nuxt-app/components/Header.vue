@@ -36,6 +36,10 @@ export default {
                 {
                     title: 'food',
                     path: '/food'
+                },
+                {
+                    title: 'todoList',
+                    path: '/todolist'
                 }
             ]
         }
