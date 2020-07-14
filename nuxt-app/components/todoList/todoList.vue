@@ -3,7 +3,6 @@
         <div class="list-wrapper" v-for="ele in todoList" :key="ele.id" @mouseleave="mouseLeaveEvt">
             <div class="list-item" @mouseover="mouseoverEvt(ele.id)">   
                 <input type="checkbox" class="form-check-input" :checked="ele.checkedFlag" :id="ele.id" @click="checkClick(ele.id)">
-                <label class="form-check-label" :for="ele.id" />
                 <input type="text" class="todo-contents" :class="{done: ele.checkedFlag}" v-model="ele.contents" @blur="mouseLeaveEvt" @focus="mouseoverEvt(ele.id)">
             </div>
             <div class="btn-wrapper" v-show="hoverdId === ele.id">
@@ -31,7 +30,9 @@
     }
 
     .form-check-input {
-        display: none;
+        /* display: none; */
+        position: static;
+        margin: 0;
     }
 
     .form-check-input[type="checkbox"]+label {
@@ -39,19 +40,7 @@
         height: 33px;
         background-color: #eee;
         margin-right: 15px;
-    }
-
-    .form-check-input[type="checkbox"]:checked + label::before {
-        content: "\2714";
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);  
-        font-size: 18px; 
-        font-weight:600; 
-        color: #fff;  
-        background:#ccc;
-        text-align: center;
-        display: inline-block;
-        width: 100%;
-        height: 100%;
+        display: none;
     }
 
     .btn.btn-outline:hover {
