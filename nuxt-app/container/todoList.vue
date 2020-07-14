@@ -11,7 +11,7 @@
             <div class="info">
                 할 일 {{todoList.length}} 개 남음
             </div>
-            <checkList :todoList="this.todoList" />
+            <todoList :todoList="this.todoList" />
         </div>
         <div>
             전체 삭제 버튼
@@ -34,12 +34,12 @@
 
 <script>
 import AppInput from '../components/common/AppInput';
-import checkList from '../components/todoList/checkList';
+import todoList from '../components/todoList/todoList';
 
 export default {
     components: {
         AppInput,
-        checkList
+        todoList
     },
     props: ['todoList'],
 
