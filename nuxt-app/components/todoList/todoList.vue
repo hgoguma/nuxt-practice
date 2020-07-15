@@ -4,7 +4,7 @@
             할 일 {{ todoList.filter(element => element.checkedFlag === false).length }} 개 남음
         </div>
         <b-list-group>
-            <div class="list-wrapper" v-for="ele in todoList" :key="ele.id" @mouseleave="mouseLeaveEvt">
+            <!-- <div class="list-wrapper" v-for="ele in todoList" :key="ele.id" @mouseleave="mouseLeaveEvt">
                 <div class="list-item" @mouseover="mouseoverEvt(ele.id)">   
                     <input type="checkbox" class="form-check-input" :checked="ele.checkedFlag" :id="ele.id" @click="checkClick(ele.id)">
                     <input type="text" class="todo-contents" :class="{done: ele.checkedFlag}" v-model="ele.contents" @blur="mouseLeaveEvt" @focus="mouseoverEvt(ele.id)">
@@ -17,10 +17,31 @@
                         <b-icon icon="trash"></b-icon>
                     </b-button>
                 </div>
-            </div>
+            </div> -->
+                <draggable 
+                    :list="todoList"
+                    :disabled="!enabled"
+                    :move="checkMove"
+                    @start="dragging = true"
+                    @end="dragging = false"
+                >
+                    <div class="list-item-wrapper" v-for="ele in todoList" :key="ele.id" @mouseleave="mouseLeaveEvt">
+                        <div class="list-item"  @mouseover="mouseoverEvt(ele.id)">   
+                            <input type="checkbox" class="form-check-input" :checked="ele.checkedFlag" :id="ele.id" @click="checkClick(ele.id)">
+                            <input type="text" class="todo-contents" :class="{done: ele.checkedFlag}" v-model="ele.contents" @blur="mouseLeaveEvt" @focus="mouseoverEvt(ele.id)">
+                        </div>
+                        <div class="btn-wrapper" v-show="hoverdId === ele.id">
+                            <b-button variant="outline" @click="modify(ele.id)">
+                                <b-icon icon="pencil"></b-icon>
+                            </b-button>
+                            <b-button  variant="outline" @click="remove(ele.id)">
+                                <b-icon icon="trash"></b-icon>
+                            </b-button>
+                        </div>
+                    </div>
+                </draggable>
         </b-list-group>
     </div>
-
 </template>
 
 <style scoped>
@@ -29,7 +50,7 @@
         text-align: center;
     }
     
-    .list-wrapper {
+    .list-item-wrapper {
         margin: 10px;
         display: flex;
     }
@@ -80,11 +101,18 @@
 </style>
 
 <script>
+import draggable from 'vuedraggable';
+
 export default {
     props: ['todoList'],
+    components: {
+        draggable
+    },
     data() {
         return {
-            hoverdId: ''
+            hoverdId: '',
+            enabled: true,
+            dragging: false
         }
     },
     methods: {
@@ -103,6 +131,9 @@ export default {
         },
         mouseLeaveEvt() {
             this.hoverdId = '';
+        },
+        checkMove: function(e) {
+            window.console.log("Future index: " + e.draggedContext.futureIndex);
         }
     }
     

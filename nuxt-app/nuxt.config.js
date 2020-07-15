@@ -1,3 +1,4 @@
+require('dotenv').config()
 
 export default {
   /*
@@ -44,6 +45,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '@/plugins/vuedraggable'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -54,12 +56,9 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
-    // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
     'nuxt-fullpage.js',
   ],
@@ -76,7 +75,7 @@ export default {
     headers: {
       common: {
         'Host': 'dapi.kakao.com',
-        'Authorization': 'KakaoAK '
+        'Authorization': process.env.KAKAO_REST_API
       }
       
     }
