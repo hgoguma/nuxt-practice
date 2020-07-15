@@ -5,17 +5,12 @@
       </div>
 </template>
 
-<style scoped>
-  @import 'assets/style.css';
-
-</style>
-
 <script>
-import Header from '../components/Header'
+import Header from '@/components/layout/Header'
 
 export default {
   components: {
-    Header,
+    Header
   },
 }
 </script>

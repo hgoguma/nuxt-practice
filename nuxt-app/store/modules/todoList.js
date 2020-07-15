@@ -2,7 +2,6 @@ const state = () => ({
     todoList: []
 });
 
-
 const getters = {
     getTodoList(state) {
         return state.todoList;
@@ -10,7 +9,7 @@ const getters = {
 }
 
 const mutations = {
-    setTodoList(state, data) {
+    addTodoList(state, data) {
         state.todoList.push(data);
     },
     setCheckFlag(state, idx) {
@@ -32,7 +31,7 @@ const actions = {
             contents: contents,
             checkedFlag: false
         }
-        context.commit('setTodoList', data);
+        context.commit('addTodoList', data);
     },
     setCheckFlag(context, id) {
         let idx = context.state.todoList.findIndex(element => element.id === id);

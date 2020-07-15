@@ -1,21 +1,14 @@
 <template>
-    <!-- <div class="header"> -->
-        <b-navbar toggleable="lg" type="dark" variant="info" fixed="top">
-            <b-navbar-brand href="#">Vue</b-navbar-brand>
-            <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-            <b-collapse id="nav-collapse" is-nav>
-                <b-navbar-nav v-for="(item, i ) in items" :key="i" >
-                    <b-nav-item href="#" @click="goPage(item.path)">{{item.title}}</b-nav-item>
-                </b-navbar-nav>
-            </b-collapse>
-        </b-navbar>
-    <!-- </div> -->
+    <b-navbar toggleable="lg" type="dark" variant="info" fixed="top">
+        <b-navbar-brand href="#">Vue</b-navbar-brand>
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+        <b-collapse id="nav-collapse" is-nav>
+            <b-navbar-nav v-for="(item, i ) in items" :key="i" >
+                <b-nav-item href="#" @click="goPage(item.path)">{{item.title}}</b-nav-item>
+            </b-navbar-nav>
+        </b-collapse>
+    </b-navbar>
 </template>
-
-<style scoped>
-    
-</style>
-
 <script>
 export default {
     data() {
@@ -34,8 +27,8 @@ export default {
                     path: '/fullpage'
                 },
                 {
-                    title: 'food',
-                    path: '/food'
+                    title: 'search',
+                    path: '/search'
                 },
                 {
                     title: 'todoList',

@@ -8,6 +8,8 @@
 
 <style scoped>
 
+    @import '@/assets/style.css';
+
     .contents-wrapper {
         max-width: 768px;
         min-height: 400px;
@@ -17,7 +19,7 @@
 </style>
 
 <script>
-import todoList from '../../container/todoList';
+import todoList from '@/container/todoList';
 
 export default {
 
@@ -29,19 +31,6 @@ export default {
         return {
             todoList: store.getters['getTodoList']
         }
-    },
-
-    data() {
-        return {
-            
-        }
-    },
-    created() {
-        
-    },
-    methods: {
-       
-     
     }
 }
 </script>

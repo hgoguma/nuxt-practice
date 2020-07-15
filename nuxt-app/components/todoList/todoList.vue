@@ -1,23 +1,34 @@
 <template>
-    <b-list-group>
-        <div class="list-wrapper" v-for="ele in todoList" :key="ele.id" @mouseleave="mouseLeaveEvt">
-            <div class="list-item" @mouseover="mouseoverEvt(ele.id)">   
-                <input type="checkbox" class="form-check-input" :checked="ele.checkedFlag" :id="ele.id" @click="checkClick(ele.id)">
-                <input type="text" class="todo-contents" :class="{done: ele.checkedFlag}" v-model="ele.contents" @blur="mouseLeaveEvt" @focus="mouseoverEvt(ele.id)">
-            </div>
-            <div class="btn-wrapper" v-show="hoverdId === ele.id">
-                <b-button variant="outline" @click="modify(ele.id)">
-                    <b-icon icon="pencil"></b-icon>
-                </b-button>
-                <b-button  variant="outline" @click="remove(ele.id)">
-                    <b-icon icon="trash"></b-icon>
-                </b-button>
-            </div>
+    <div>
+        <div class="info">
+            할 일 {{ todoList.filter(element => element.checkedFlag === false).length }} 개 남음
         </div>
-    </b-list-group>
+        <b-list-group>
+            <div class="list-wrapper" v-for="ele in todoList" :key="ele.id" @mouseleave="mouseLeaveEvt">
+                <div class="list-item" @mouseover="mouseoverEvt(ele.id)">   
+                    <input type="checkbox" class="form-check-input" :checked="ele.checkedFlag" :id="ele.id" @click="checkClick(ele.id)">
+                    <input type="text" class="todo-contents" :class="{done: ele.checkedFlag}" v-model="ele.contents" @blur="mouseLeaveEvt" @focus="mouseoverEvt(ele.id)">
+                </div>
+                <div class="btn-wrapper" v-show="hoverdId === ele.id">
+                    <b-button variant="outline" @click="modify(ele.id)">
+                        <b-icon icon="pencil"></b-icon>
+                    </b-button>
+                    <b-button  variant="outline" @click="remove(ele.id)">
+                        <b-icon icon="trash"></b-icon>
+                    </b-button>
+                </div>
+            </div>
+        </b-list-group>
+    </div>
+
 </template>
 
 <style scoped>
+
+    .info {
+        text-align: center;
+    }
+    
     .list-wrapper {
         margin: 10px;
         display: flex;
@@ -30,7 +41,6 @@
     }
 
     .form-check-input {
-        /* display: none; */
         position: static;
         margin: 0;
     }

@@ -1,53 +1,31 @@
 <template>
     <div>
-        <div class="title-wrapper">
-            <h3>todoList</h3>
-            <p>2020년 7월 14일 화요일</p>
-        </div>
-        <div>
-            <AppInput />
-        </div>
-        <div>
-            <div class="info">
-                할 일 {{ todoList.filter(element => element.checkedFlag === false).length }} 개 남음
-            </div>
-            <todoList :todoList="this.todoList" />
-        </div>
-        <!-- <div>
-            전체 삭제 버튼
-        </div> -->
+        <AppTitle :title="title" :contents="contents" />
+        <AppInput :icon="icon" :submit="addTodoList" />
+        <todoList :todoList="todoList" />
     </div>
 </template>
 
-<style scoped>
-    h3, p, .info {
-        text-align: center;
-    }
-
-    .title-wrapper {
-        background-color: #333333;
-        color: #fff;
-        padding: 15px;
-    }
-   
-</style>
-
 <script>
-import AppInput from '../components/common/AppInput';
-import todoList from '../components/todoList/todoList';
+import AppTitle from '@/components/common/AppTitle';
+import AppInput from '@/components/common/AppInput';
+import todoList from '@/components/todoList/todoList';
 
 export default {
     components: {
+        AppTitle,
         AppInput,
         todoList
     },
     props: ['todoList'],
+    data() {
+        return {
+            title: 'todoList',
+            contents: '2020년 7월 15일 수요일',
+            icon: 'plus'
+        }
+    },
     created() {
-        this.$nuxt.$on('submit', (inputVal) => {
-            this.$store.dispatch('addTodoList', inputVal);
-            this.getTodoList();
-        });
-
         this.$nuxt.$on('check', (id) => {
             this.$store.dispatch('setCheckFlag', id);
             this.getTodoList();
@@ -66,8 +44,11 @@ export default {
     methods: {
         getTodoList() {
             this.todoList = this.$store.getters['getTodoList'];
+        },
+        addTodoList(inputVal) {
+            this.$store.dispatch('addTodoList', inputVal);
+            this.getTodoList();
         }
     }
-    
 }
 </script>

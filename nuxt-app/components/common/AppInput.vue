@@ -1,8 +1,8 @@
 <template>
     <div class="inputWrapper">
-        <b-form-input class="input-custom" v-model="inputVal" type="text"></b-form-input>
+        <b-form-input class="input-custom" v-model="inputVal" type="text" :placeholder="placeholder"></b-form-input>
         <b-button variant="light" @click="submitBtn">
-            <b-icon icon="plus"></b-icon>
+            <b-icon :icon="icon"></b-icon>
         </b-button>
     </div>
 </template>
@@ -19,11 +19,11 @@
         border-radius: 0;
         margin-right: 10px;
     }
-    
 </style>
 
 <script>
 export default {
+    props: ['icon', 'placeholder', 'submit'],
     data() {
         return {
             inputVal: ''
@@ -34,7 +34,7 @@ export default {
             if(this.inputVal.trim() === '' ) {
                 return;
             }
-            $nuxt.$emit('submit', this.inputVal);
+            this.submit(this.inputVal);
             this.inputVal = '';
         }
     }

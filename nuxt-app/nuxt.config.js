@@ -76,7 +76,7 @@ export default {
     headers: {
       common: {
         'Host': 'dapi.kakao.com',
-        'Authorization': 'KakaoAK '
+        'Authorization': 'KakaoAK 6dbe02f3edc0d0f578465215cd97f0d8'
       }
       
     }
