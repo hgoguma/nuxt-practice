@@ -9,7 +9,6 @@
                     <b-icon icon="map"></b-icon>
                 </b-button>
             </a>
-            
             </b-list-group-item>
         </b-list-group>
     </div>

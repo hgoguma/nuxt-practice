@@ -37,6 +37,14 @@ export default {
                 {
                     title: 'test',
                     path: '/test'
+                },
+                {
+                    title: 'login',
+                    path: '/login'
+                },
+                {
+                    title: 'signUp',
+                    path: '/signUp'
                 }
             ]
         }
